@@ -46,16 +46,31 @@ int main(){
      * we have read count grades so far, and
      * sum is the sum of the first count grades
      */
-    while (cin >> x){
+    while (cin >> x){ /* The definition of istream defines the meaning of "cin" in the context
+                         of a "while" or "if" statement (value of cin depends on success of last
+                         read vaue. Furthermore, when arithmentic values are in the context of 
+                         conditions, they are automatically converted to bool. */
         ++count;
         sum += x;
     }
 
-    /* write the result */
+    /* write the result.
+     * We make a streamsize object 'prec' with the current pression of the cout stream before setting
+     * the stream precision with the manipulator 'setprecision(3)' so that we can revert the precision
+     * to what cout was before (good practice). */
     streamsize prec = cout.precision();
     cout << "Your final grade is " << setprecision(3)
          << 0.2 * midterm + 0.4 * final + 0.4 * sum / count
          << setprecision(prec) << endl;
+
+    /* note: could have equally written the following, but best practice to set the precision to 
+     * part of the program intended
+     *
+     * streamsize prec = cout.precision(3) // set precision to 3, return the previous value
+     * cout << "Your final grade is "
+     *      << 0.2 * midtern + 0.3 * final + 0.4 * sum / count << endl;
+     * cout.precision(prec); // reset precision to its original value
+     */
 
     return 0;
 }

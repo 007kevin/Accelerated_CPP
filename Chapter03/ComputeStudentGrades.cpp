@@ -52,6 +52,7 @@ int main(){
                          conditions, they are automatically converted to bool. */
         ++count;
         sum += x;
+
     }
 
     /* write the result.

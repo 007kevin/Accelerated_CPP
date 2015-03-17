@@ -23,13 +23,19 @@ int main(){
     cout << "Enter all your homework grades, "
             "followed by end-of-file: ";
 
+    /* The vector type is defined using a language feature called template classes */
     vector<double> homework;
     double x;
     //invariant: homework contains all the homework grades read so far
     while (cin >> x)
         homework.push_back(x);
 
-    typedef vector<double>::size_type vec_sz;
+    /* Store vector size in local variable to avoid calling the vector size() method twice */
+    /* Different implementations use different types to represent sizes, so we cannot write
+     * appropriate type directly and remain implementation-independent. Hence, make use of the 
+     * size_type that the library defines to represent container sizes */
+    typedef vector<double>::size_type vec_sz; /* << Names defined via typedef have the same 
+                                                 scope as any other names */
     vec_sz size = homework.size();
     if (size == 0){
         cout << endl << "You must enter your grades. "
@@ -37,11 +43,14 @@ int main(){
 
         return 1;
     }
-
-    sort(homework.begin(), homework.end());
+    /* sort functions degined in <algorithm>, in non-decreasing (note how 'increasing' was not used
+     * because some elements might be equal to one another */
+    sort(homework.begin(), homework.end()); /* << sort function works in place; no new containers 
+                                               created to hold results */
 
     vec_sz mid = size/2;
     double median;
+    /* Observation: Elements of the vector object can be accessed via index */
     median = size % 2 == 0 ? (homework[mid] + homework[mid - 1]) / 2 : homework[mid];
 
     streamsize prec = cout.precision();
@@ -51,3 +60,12 @@ int main(){
 
     return 0;
 }
+
+/* Interesting note on vector and sort:
+ * Every standard-conforming C++ implementation must
+ *      Implement vector so that appending a large number of elements to a vector
+ *      is no worse than proportional to the number of elements
+ *
+ *      Implement sort to be no slower than nlog(n), where n is the number of elements
+ *      being sorted
+ */

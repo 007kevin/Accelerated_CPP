@@ -1,0 +1,56 @@
+Personal notes from Chapter04:
+
+4.1.4
+- Arguments that correspond to nonconst reference parameters MUST be lvalues.
+- Arguments that are passed by value or bound to a const reference can be any value.
+- Const reference can pass an rvalue, but nonconst reference must be an lvalue.
+- Const reference will bind the parameter directly to the rvalue without copying.
+
+4.1.5
+- In calling the try-catch block, writing code succinctly may not be beneficial.
+  For example, if we had written:
+
+try {
+    streamsize prec = cout.precision();
+    cout << "Your final grade is " << setprecision(3)
+         << grade(midterm, final, homework) << setprecision(prec);
+}
+
+  then grade may throw an exception after the output text "Your final grade is " making the 
+  error message seems spurious. Furthermore, with a thrown exception, the precision of the 
+  output stream will not be reset. A good rule of thumb of to avoid more than one side effect
+  in a single statement.  
+
+4.2.2
+- The sort function on the std::vector<Student_info> objects will not work because sort
+  does not have a defined < operator on Student_info struct objects. Thus sort function
+  has an optional third argument that is a predicate for defining the < operator:
+    
+    bool compare(const Student_info& x, const Student_info& y){
+        return x.name < y.name;
+    }
+
+  Now we can call sort(students.begin(), students.end(), compare);
+
+4.2.3
+- The library function max defined in the header <algorithm> must have both its arguments of the
+  same type. This in the section's example, maxlen variable is of type string::size_type to
+  interoperate with record.name.size() (name member of Student_info struct is of type string, thus
+  the size method will be of type string::size_type)
+
+4.3
+- Worth noting in the examples, our own headers are refered as header files, implementation-supplied
+  headers are refered as standard headers (rather than standard header files). System headers need
+  not be implemented as files.
+
+- Good idea for #ifndef to be the very fist line of the file, without even a comment before it.
+  Reason is that some C++ implementations detect files that have this form and if the variable
+  is defined, do not even bother to read the file the second time around (for optimization). If 
+  #indef is not the first line, compiler may open the header file even though it is redundant to
+  do so
+
+
+
+
+
+

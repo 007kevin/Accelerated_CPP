@@ -14,6 +14,6 @@ struct Student_info {
 // We will use these functions only if we are using the Student_info structure,
 // so it makes sense to package them together with the structure definition
 bool compare(const Student_info&, const Student_info&);
-std::istream& read(std::istream&, std::vector<double>&);
+std::istream& read(std::istream&, Student_info&);
 std::istream& read_hw(std::istream&, std::vector<double>&);
 #endif

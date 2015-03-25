@@ -49,7 +49,12 @@ try {
   #indef is not the first line, compiler may open the header file even though it is redundant to
   do so
 
-
+4.6 ~ Details
+- function definition can be qualified with 'inline' to avoid function-call overhead by replacing
+  each call to the function by a copy of the function body. The compiler will expand calls to the
+  function inline when appropriate.
+- note: compiler must see the inline function definitions so 'inline's are normally defined in 
+  header files rather than source files4.6 ~ Details
 
 
 

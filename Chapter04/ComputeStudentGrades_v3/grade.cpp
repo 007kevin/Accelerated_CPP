@@ -19,6 +19,7 @@ double grade(double midterm, double final, const vector<double>& hw){
     return grade(midterm, final, median(hw));
 }
 
+// compute grade from the Student_info reference to struct object
 double grade(const Student_info& s){
     return grade(s.midterm, s.final, s.homework);
 }

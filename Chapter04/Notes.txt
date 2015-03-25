@@ -54,7 +54,7 @@ try {
   each call to the function by a copy of the function body. The compiler will expand calls to the
   function inline when appropriate.
 - note: compiler must see the inline function definitions so 'inline's are normally defined in 
-  header files rather than source files4.6 ~ Details
+  header files rather than source files
 
 
 
